@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix - Watch Movies Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: white;
+        }
+
+        /* Custom Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2a96fa;
+            text-transform: uppercase;
+        }
+
+        /* Modern Search Bar */
+        .search-container {
+            position: relative;
+            width: 30%;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid #2a96fa;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            background: rgba(255,255,255,0.2);
+            width: 110%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('hero-bg.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Movie Cards */
+        .movie-row {
+            padding: 30px 50px;
+        }
+
+        .row-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .row-title:hover {
+            color: #2a96fa;
+        }
+
+        .movie-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+        }
+
+        .movie-card {
+            min-width: 250px;
+            height: 150px;
+            border-radius: 10px;
+            background: #1a1a1a;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a96fa;
+            border-radius: 4px;
+        }
+
+        /* Action Button */
+        .action-btn {
+            padding: 10px 25px;
+            background: #2a96fa;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #1d6db5;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">STREAMFLIX</div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search movies...">
+        </div>
+        <div class="user-menu">☰</div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">The New Blockbuster</h1>
+            <p class="hero-description">Watch the latest movies in 4K HDR quality.</p>
+            <button class="action-btn">Watch Now ➔</button>
+        </div>
+    </section>
+
+    <section class="movie-row">
+        <h2 class="row-title">Trending Now</h2>
+        <div class="movie-container">
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+        </div>
+    </section>
+
+    <section class="movie-row">
+        <h2 class="row-title">Popular on StreamFlix</h2>
+        <div class="movie-container">
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+            <div class="movie-card"></div>
+        </div>
+    </section>
+
+    <script>
+        // Search functionality
+        const searchBar = document.querySelector('.search-bar');
+        const movieCards = document.querySelectorAll('.movie-card');
+
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            movieCards.forEach(card => {
+                const title = card.dataset.title.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Add hover effect to movie cards
+        movieCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
